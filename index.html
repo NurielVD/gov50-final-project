@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","legislatordiversity.com_data (1).csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,11 +1517,93 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
 <h2 id="milestone-1-repository">Milestone 1: Repository</h2>
 <h2 id="i-am-interested-in-exploring-data-related-to-elections-and-polling-particularly-data-regarding-pollingelection-prediction-accuracy-and-data-that-could-allow-me-to-compare-different-weighting-strategies-in-the-polling-process.">I am interested in exploring data related to elections and polling, particularly data regarding polling/election prediction accuracy and data that could allow me to compare different weighting strategies in the polling process.</h2>
 <h2 id="milestone-2-data-and-proposal">Milestone 2: Data and Proposal</h2>
 <h2 id="how-do-the-demographics-of-a-states-voting-population-affect-the-demographics-of-its-legislature-in-my-study-i-will-attempt-to-quantify-the-relationshipcorrelation-between-state-populations-racial-and-gender-diversity-rates-and-their-respective-legislatures-racial-and-gender-diversity-rates.-i-hypothesize-that-racial-and-gender-diversity-in-state-populations-will-be-positively-correlated-with-the-same-kind-of-diversity-in-their-state-legislatures.-this-hypothesis-follows-from-the-theory-that-people-are-more-likely-to-vote-for-candidates-who-are-more-similar-to-them-and-so-states-with-voting-populations-that-have-higher-concentrations-of-different-racialethnic-groups-will-see-a-related-increase-in-the-concentrations-of-legislators-from-those-racialethnic-groups.-my-explanatory-variables-of-interest-are-the-total-asian-population-in-the-given-state-legislature-district-as-well-as-the-total-hispaniclatino-population-the-total-black-population-the-total-white-population-the-total-native-hawaiian-population-and-the-total-native-american-population.-each-of-these-variables-are-measured-by-a-raw-count-which-reflects-the-number-of-people-in-each-of-these-groups.-my-outcome-variables-are-the-assigned-raceethnicity-and-gender-of-the-state-legislator-of-the-given-district-which-are-measured-qualitatively-white-black-etc.-for-raceethnicity-and-malefemaleetc.-for-gender.-if-i-observe-a-positive-correlation-either-between-the-general-diversity-of-states-populations-and-the-diversity-of-their-state-legislators-or-between-the-concentration-of-certain-racial-groups-in-states-populations-and-and-concentrations-of-those-same-racial-groups-in-respective-states-legislative-bodies-my-hypothesis-would-be-supported.-however-a-lack-of-correlation-and-perhaps-even-a-negative-correlation-between-either-of-these-two-variables-would-work-against-my-hypothesis.-my-data-will-likely-be-from-httpswww.legislatordiversity.com.">How do the demographics of a state’s voting population affect the demographics of its legislature? In my study, I will attempt to quantify the relationship/correlation between state populations’ racial and gender diversity rates and their respective legislatures’ racial and gender diversity rates. I hypothesize that racial and gender diversity in state populations will be positively correlated with the same kind of diversity in their state legislatures. This hypothesis follows from the theory that people are more likely to vote for candidates who are more similar to them, and so states with voting populations that have higher concentrations of different racial/ethnic groups will see a related increase in the concentrations of legislators from those racial/ethnic groups. My explanatory variables of interest are the total Asian population in the given state legislature district, as well as the total Hispanic/Latino population, the total Black population, the total white population, the total Native Hawaiian population, and the total Native American population. Each of these variables are measured by a raw count, which reflects the number of people in each of these groups. My outcome variables are the assigned race/ethnicity and gender of the state legislator of the given district, which are measured qualitatively (White, Black, etc. for race/ethnicity and male/female/etc. for gender). If I observe a positive correlation either between the general diversity of states’ populations and the diversity of their state legislators OR between the concentration of certain racial groups in states’ populations and and concentrations of those same racial groups in respective states’ legislative bodies, my hypothesis would be supported. However, a lack of correlation (and perhaps even a negative correlation) between either of these two variables would work against my hypothesis. My data will likely be from <a href="https://www.legislatordiversity.com/" class="uri">https://www.legislatordiversity.com/</a>.</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="milesotne-3-first-visualization">Milesotne 3: First Visualization</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>legislation_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"legislatordiversity.com_data (1).csv"</span><span class='op'>)</span></span>
+<span><span class='va'>legislation_data</span></span></code></pre>
+</div>
+<pre><code># A tibble: 95,976 × 21
+   `Election Year` State   `Legislative Branch`     District
+             &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                    &lt;chr&gt;   
+ 1            2010 Alabama House Of Representatives 1       
+ 2            2010 Alabama House Of Representatives 10      
+ 3            2010 Alabama House Of Representatives 100     
+ 4            2010 Alabama House Of Representatives 101     
+ 5            2010 Alabama House Of Representatives 102     
+ 6            2010 Alabama House Of Representatives 103     
+ 7            2010 Alabama House Of Representatives 104     
+ 8            2010 Alabama House Of Representatives 105     
+ 9            2010 Alabama House Of Representatives 11      
+10            2010 Alabama House Of Representatives 12      
+# ℹ 95,966 more rows
+# ℹ 17 more variables: `Name Of Elected Legislator` &lt;chr&gt;,
+#   `Political Party Affiliation Of Legislator` &lt;chr&gt;,
+#   `Assigned Race / Ethnicity Of Legislator` &lt;chr&gt;,
+#   `Assigned Gender Of Legislator` &lt;chr&gt;,
+#   `Total Population In District` &lt;dbl&gt;,
+#   `Total Voting Age Population In District` &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>legislation_data</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/drop_na.html'>drop_na</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>white_prop <span class='op'>=</span> <span class='va'>`Total White Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
+<span>         black_prop <span class='op'>=</span> <span class='va'>`Total Black Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
+<span>         asian_prop <span class='op'>=</span> <span class='va'>`Total Asian Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
+<span>         hispanic_prop <span class='op'>=</span> <span class='va'>`Total Hispanic / Latino Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
+<span>         hawaiian_prop <span class='op'>=</span> <span class='va'>`Total Native Hawaiian Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
+<span>         native_prop <span class='op'>=</span> <span class='va'>`Total American Indian Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span><span class='op'>)</span></span>
+<span><span class='va'>legislation_data</span></span></code></pre>
+</div>
+<pre><code># A tibble: 35,001 × 27
+   `Election Year` State   `Legislative Branch`     District
+             &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                    &lt;chr&gt;   
+ 1            2018 Alabama House Of Representatives 1       
+ 2            2018 Alabama House Of Representatives 10      
+ 3            2018 Alabama House Of Representatives 100     
+ 4            2018 Alabama House Of Representatives 101     
+ 5            2018 Alabama House Of Representatives 102     
+ 6            2018 Alabama House Of Representatives 103     
+ 7            2018 Alabama House Of Representatives 104     
+ 8            2018 Alabama House Of Representatives 105     
+ 9            2018 Alabama House Of Representatives 11      
+10            2018 Alabama House Of Representatives 12      
+# ℹ 34,991 more rows
+# ℹ 23 more variables: `Name Of Elected Legislator` &lt;chr&gt;,
+#   `Political Party Affiliation Of Legislator` &lt;chr&gt;,
+#   `Assigned Race / Ethnicity Of Legislator` &lt;chr&gt;,
+#   `Assigned Gender Of Legislator` &lt;chr&gt;,
+#   `Total Population In District` &lt;dbl&gt;,
+#   `Total Voting Age Population In District` &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>alaska_diversity_plot</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>State</span> <span class='op'>==</span> <span class='st'>"Alaska"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>`Legislative Branch`</span> <span class='op'>==</span> <span class='st'>"Senate"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>District</span>, y <span class='op'>=</span> <span class='va'>white_prop</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>District</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Population Whiteness vs. State Senate District in Alaska"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"State Senate District"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Proportion of White People"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>limits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  </span>
+<span><span class='va'>alaska_diversity_plot</span> </span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
