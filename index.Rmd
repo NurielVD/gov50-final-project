@@ -7,6 +7,9 @@ output:
     self_contained: false
 ---
 
+```{r}
+library(tidyverse)
+```
 
 
 ## Milestone 1: Repository 
@@ -14,3 +17,42 @@ output:
 
 ## Milestone 2: Data and Proposal
 ## How do the demographics of a state's voting population affect the demographics of its legislature? In my study, I will attempt to quantify the relationship/correlation between state populations' racial and gender diversity rates and their respective legislatures' racial and gender diversity rates. I hypothesize that racial and gender diversity in state populations will be positively correlated with the same kind of diversity in their state legislatures. This hypothesis follows from the theory that people are more likely to vote for candidates who are more similar to them, and so states with voting populations that have higher concentrations of different racial/ethnic groups will see a related increase in the concentrations of legislators from those racial/ethnic groups. My explanatory variables of interest are the total Asian population in the given state legislature district, as well as the total Hispanic/Latino population, the total Black population, the total white population, the total Native Hawaiian population, and the total Native American population. Each of these variables are measured by a raw count, which reflects the number of people in each of these groups. My outcome variables are the assigned race/ethnicity and gender of the state legislator of the given district, which are measured qualitatively (White, Black, etc. for race/ethnicity and male/female/etc. for gender). If I observe a positive correlation either between the general diversity of states' populations and the diversity of their state legislators OR between the concentration of certain racial groups in states' populations and and concentrations of those same racial groups in respective states' legislative bodies, my hypothesis would be supported. However, a lack of correlation (and perhaps even a negative correlation) between either of these two variables would work against my hypothesis. My data will likely be from https://www.legislatordiversity.com/.
+
+
+## Milesotne 3: First Visualization
+
+```{r}
+legislation_data <- read_csv("legislatordiversity.com_data (1).csv")
+legislation_data
+```
+
+```{r}
+legislation_data <- legislation_data |>
+  drop_na() |>
+  mutate(white_prop = `Total White Population In District`/`Total Population In District`,
+         black_prop = `Total Black Population In District`/`Total Population In District`,
+         asian_prop = `Total Asian Population In District`/`Total Population In District`,
+         hispanic_prop = `Total Hispanic / Latino Population In District`/`Total Population In District`,
+         hawaiian_prop = `Total Native Hawaiian Population In District`/`Total Population In District`,
+         native_prop = `Total American Indian Population In District`/`Total Population In District`)
+legislation_data
+```
+
+
+
+```{r}
+alaska_diversity_plot <- legislation_data |>
+  filter(State == "Alaska") |>
+  filter(`Legislative Branch` == "Senate") |>
+  ggplot(mapping = aes(x = District, y = white_prop)) +
+  geom_col(mapping = aes(fill = District)) +
+  labs(title = "Population Whiteness vs. State Senate District in Alaska",
+       x = "State Senate District",
+       y = "Proportion of White People") +
+  guides(fill = FALSE) + 
+  scale_y_continuous(limits = c(0,1))
+  
+alaska_diversity_plot 
+```
+
+
