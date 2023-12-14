@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Nuriel Vera-DeGraff"
-description: "My final project"
+description: "State Legislature Diversity"
 output:
   distill::distill_article:
     self_contained: false

@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","legislatordiversity.com_data (1).csv"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","legislatordiversity.com_data (1).csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,67 +1517,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
+<h2 id="introduction">Introduction</h2>
+<p>How do the demographics of a state’s voting population affect the demographics of its legislature? In my study, I will attempt to quantify the relationship between the racial diversity of states’ voting populations and their respective state legislatures. I hypothesize that racial diversity in state voting populations will be positively correlated with racial diversity in their respective state legislatures. This hypothesis follows from the theory that people are more likely to vote for candidates who are more similar to them, and so states with voting populations that have higher concentrations of people of color will see a related increase in the concentrations of legislators of color. I’m interested in this question because I believe that state legislatures should be racially representative of the diversity seen in their their respective populations.</p>
+<h2 id="data">Data</h2>
+<p>In this project, I used a data frame from <a href="https://www.legislatordiversity.com/" class="uri">https://www.legislatordiversity.com/</a>, a website created by Andy Neville (<a href="https://www.linkedin.com/in/andrew-neville-88a33233/" class="uri">https://www.linkedin.com/in/andrew-neville-88a33233/</a>) and Ian Flick (<a href="https://www.linkedin.com/in/ian-flick-00613371/" class="uri">https://www.linkedin.com/in/ian-flick-00613371/</a>). The website is called <em>Legislator Diversity</em> and details diversity of various kinds in state legislatures across the country. For my purpose, the key dependent variable, originally a qualitative variable for each legislator (as presented in the source) and then eventually translated into a quantitative variable (as a proportion of legislators of color for each state) is the race of individual state legislators across the country, were collected by the creators by scraping through membership lists from various national ethnic state legislator caucuses (like the National Black Caucus of State Legislators), news articles, Wikipedia findings, and “manual classification based on the authors’ visual review of a legislator’s picture”. On the other hand, the key independent variable (as presented in the source) is the race breakdown of state voting populations. This variable, a quantitative variable, was compiled through “‘Demographic and Housing Estimates’ (Table DP05) from the U.S. Census Bureau’s 2018 American Community Survey” and official state voter rolls (on a state-by-state basis). Based on the nature of my data source and the variables I will be comparing, this project has a cross-sectional design: I am comparing the outcome variable (proportion of non-white state legislators) across states with varying proportions of treated vs. control units (akin to the varying proportion of non-white voters in different states) during a given time frame (2010-2022).</p>
+<p>To start offering insight into my data, I first needed to alter the data significantly. First, this meant creating new variables that represented the proportion of different racies/ethnicities represented in a given state legislature district (like <code>black_prop</code>). I also changed the names of some of the other variables of interest to make them more useful. Then, I condensed my data set, only keeping the variables I really needed to investigate my research question. These centered around the racial breakdown of the voting population and information about the individual legislators. I also created a new variable, <code>legislator_poc_prop</code>, which measured the proportion of legislators of color in a given state. Critically, at this point I group my data by state, so I can see aggregated information 49 states. Next, I started visualizing my outcome variable by creating a plot summarizing my dependent variable of interest (the proportion of state legislators of color) across 49 states.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<h2 id="milestone-1-repository">Milestone 1: Repository</h2>
-<h1 id="i-am-interested-in-exploring-data-related-to-elections-and-polling-particularly-data-regarding-pollingelection-prediction-accuracy-and-data-that-could-allow-me-to-compare-different-weighting-strategies-in-the-polling-process.">I am interested in exploring data related to elections and polling, particularly data regarding polling/election prediction accuracy and data that could allow me to compare different weighting strategies in the polling process.</h1>
-<h2 id="milestone-2-data-and-proposal">Milestone 2: Data and Proposal</h2>
-<h1 id="how-do-the-demographics-of-a-states-voting-population-affect-the-demographics-of-its-legislature-in-my-study-i-will-attempt-to-quantify-the-relationshipcorrelation-between-state-populations-racial-and-gender-diversity-rates-and-their-respective-legislatures-racial-and-gender-diversity-rates.-i-hypothesize-that-racial-and-gender-diversity-in-state-populations-will-be-positively-correlated-with-the-same-kind-of-diversity-in-their-state-legislatures.-this-hypothesis-follows-from-the-theory-that-people-are-more-likely-to-vote-for-candidates-who-are-more-similar-to-them-and-so-states-with-voting-populations-that-have-higher-concentrations-of-different-racialethnic-groups-will-see-a-related-increase-in-the-concentrations-of-legislators-from-those-racialethnic-groups.-my-explanatory-variables-of-interest-are-the-total-asian-population-in-the-given-state-legislature-district-as-well-as-the-total-hispaniclatino-population-the-total-black-population-the-total-white-population-the-total-native-hawaiian-population-and-the-total-native-american-population.-each-of-these-variables-are-measured-by-a-raw-count-which-reflects-the-number-of-people-in-each-of-these-groups.-my-outcome-variables-are-the-assigned-raceethnicity-and-gender-of-the-state-legislator-of-the-given-district-which-are-measured-qualitatively-white-black-etc.-for-raceethnicity-and-malefemaleetc.-for-gender.-if-i-observe-a-positive-correlation-either-between-the-general-diversity-of-states-populations-and-the-diversity-of-their-state-legislators-or-between-the-concentration-of-certain-racial-groups-in-states-populations-and-and-concentrations-of-those-same-racial-groups-in-respective-states-legislative-bodies-my-hypothesis-would-be-supported.-however-a-lack-of-correlation-and-perhaps-even-a-negative-correlation-between-either-of-these-two-variables-would-work-against-my-hypothesis.-my-data-will-likely-be-from-httpswww.legislatordiversity.com.">How do the demographics of a state’s voting population affect the demographics of its legislature? In my study, I will attempt to quantify the relationship/correlation between state populations’ racial and gender diversity rates and their respective legislatures’ racial and gender diversity rates. I hypothesize that racial and gender diversity in state populations will be positively correlated with the same kind of diversity in their state legislatures. This hypothesis follows from the theory that people are more likely to vote for candidates who are more similar to them, and so states with voting populations that have higher concentrations of different racial/ethnic groups will see a related increase in the concentrations of legislators from those racial/ethnic groups. My explanatory variables of interest are the total Asian population in the given state legislature district, as well as the total Hispanic/Latino population, the total Black population, the total white population, the total Native Hawaiian population, and the total Native American population. Each of these variables are measured by a raw count, which reflects the number of people in each of these groups. My outcome variables are the assigned race/ethnicity and gender of the state legislator of the given district, which are measured qualitatively (White, Black, etc. for race/ethnicity and male/female/etc. for gender). If I observe a positive correlation either between the general diversity of states’ populations and the diversity of their state legislators OR between the concentration of certain racial groups in states’ populations and and concentrations of those same racial groups in respective states’ legislative bodies, my hypothesis would be supported. However, a lack of correlation (and perhaps even a negative correlation) between either of these two variables would work against my hypothesis. My data will likely be from <a href="https://www.legislatordiversity.com/" class="uri">https://www.legislatordiversity.com/</a>.</h1>
-<h2 id="milestone-3-first-visualization">Milestone 3: First Visualization</h2>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>legislation_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"legislatordiversity.com_data (1).csv"</span><span class='op'>)</span></span>
-<span><span class='va'>legislation_data</span></span></code></pre>
-</div>
-<pre><code># A tibble: 95,976 × 21
-   `Election Year` State   `Legislative Branch`     District
-             &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                    &lt;chr&gt;   
- 1            2010 Alabama House Of Representatives 1       
- 2            2010 Alabama House Of Representatives 10      
- 3            2010 Alabama House Of Representatives 100     
- 4            2010 Alabama House Of Representatives 101     
- 5            2010 Alabama House Of Representatives 102     
- 6            2010 Alabama House Of Representatives 103     
- 7            2010 Alabama House Of Representatives 104     
- 8            2010 Alabama House Of Representatives 105     
- 9            2010 Alabama House Of Representatives 11      
-10            2010 Alabama House Of Representatives 12      
-# ℹ 95,966 more rows
-# ℹ 17 more variables: `Name Of Elected Legislator` &lt;chr&gt;,
-#   `Political Party Affiliation Of Legislator` &lt;chr&gt;,
-#   `Assigned Race / Ethnicity Of Legislator` &lt;chr&gt;,
-#   `Assigned Gender Of Legislator` &lt;chr&gt;,
-#   `Total Population In District` &lt;dbl&gt;,
-#   `Total Voting Age Population In District` &lt;dbl&gt;, …</code></pre>
-</div>
-<h2 id="new-variables">New variables!</h2>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>legislation_data</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/drop_na.html'>drop_na</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>white_prop <span class='op'>=</span> <span class='va'>`Total White Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         black_prop <span class='op'>=</span> <span class='va'>`Total Black Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         asian_prop <span class='op'>=</span> <span class='va'>`Total Asian Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         hispanic_prop <span class='op'>=</span> <span class='va'>`Total Hispanic / Latino Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         hawaiian_prop <span class='op'>=</span> <span class='va'>`Total Native Hawaiian Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         native_prop <span class='op'>=</span> <span class='va'>`Total American Indian Population In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         independent_prop <span class='op'>=</span> <span class='va'>`Total Registered Independents In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         democrat_prop <span class='op'>=</span> <span class='va'>`Total Registered Democrats In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         republican_prop <span class='op'>=</span> <span class='va'>`Total Registered Republicans In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         legislator_race <span class='op'>=</span> <span class='va'>`Assigned Race / Ethnicity Of Legislator`</span>,</span>
-<span>         legislator_gender <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>`Assigned Gender Of Legislator`</span> <span class='op'>==</span> <span class='st'>"Female"</span>, <span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>,</span>
-<span>         legislator_party <span class='op'>=</span> <span class='va'>`Political Party Affiliation Of Legislator`</span>,</span>
-<span>         district_pop <span class='op'>=</span> <span class='va'>`Total Population In District`</span>,</span>
-<span>         registered_prop <span class='op'>=</span> <span class='va'>`Total Population Registered To Vote In District`</span><span class='op'>/</span><span class='va'>`Total Population In District`</span>,</span>
-<span>         legislative_branch <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>`Legislative Branch`</span> <span class='op'>==</span> <span class='st'>"House Of Representatives"</span>, <span class='st'>"House"</span>, <span class='st'>"Senate"</span><span class='op'>)</span>,</span>
-<span>         year <span class='op'>=</span> <span class='va'>`Election Year`</span>,</span>
-<span>         state <span class='op'>=</span> <span class='va'>`State`</span>,</span>
-<span>         district <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>`District`</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>legislation_data</span></span></code></pre>
-</div>
 <pre><code># A tibble: 35,001 × 39
    `Election Year` State   `Legislative Branch`     District
              &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                    &lt;chr&gt;   
@@ -1599,112 +1544,147 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 #   `Total Population In District` &lt;dbl&gt;,
 #   `Total Voting Age Population In District` &lt;dbl&gt;, …</code></pre>
 </div>
-<h2 id="alaska-diversity-plot">Alaska diversity plot</h2>
+<p>In the following chunk, I condense my data set to columns of interest and (critically) group the data by state. Here, I also create the new variable <code>legislator_poc_prop</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>alaska_diversity_plot</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>State</span> <span class='op'>==</span> <span class='st'>"Alaska"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>`Legislative Branch`</span> <span class='op'>==</span> <span class='st'>"Senate"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>District</span>, y <span class='op'>=</span> <span class='va'>white_prop</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>District</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Population Whiteness vs. State Senate District in Alaska"</span>,</span>
-<span>       x <span class='op'>=</span> <span class='st'>"State Senate District"</span>,</span>
-<span>       y <span class='op'>=</span> <span class='st'>"Proportion of White People"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>limits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
-<span>  </span>
-<span><span class='va'>alaska_diversity_plot</span> </span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>legislation_data</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>select</span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>state</span>, <span class='va'>district</span>, <span class='va'>white_prop</span>, <span class='va'>black_prop</span>, <span class='va'>asian_prop</span>, <span class='va'>hispanic_prop</span>, <span class='va'>hawaiian_prop</span>, <span class='va'>native_prop</span>, <span class='va'>independent_prop</span>, <span class='va'>democrat_prop</span>, <span class='va'>republican_prop</span>, <span class='va'>legislator_race</span>, <span class='va'>legislator_gender</span>, <span class='va'>legislator_party</span>, <span class='va'>district_pop</span>, <span class='va'>registered_prop</span>, <span class='va'>legislative_branch</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>state_data</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>state</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>summarize</span><span class='op'>(</span>white_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>white_prop</span><span class='op'>)</span>,</span>
+<span>            black_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>black_prop</span><span class='op'>)</span>,</span>
+<span>            asian_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>asian_prop</span><span class='op'>)</span>,</span>
+<span>            hispanic_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>hispanic_prop</span><span class='op'>)</span>,</span>
+<span>            hawaiian_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>hawaiian_prop</span><span class='op'>)</span>,</span>
+<span>            native_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>native_prop</span><span class='op'>)</span>,</span>
+<span>            independent_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>independent_prop</span><span class='op'>)</span>,</span>
+<span>            democrat_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>democrat_prop</span><span class='op'>)</span>,</span>
+<span>            republican_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>republican_prop</span><span class='op'>)</span>,</span>
+<span>            registered_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>registered_prop</span><span class='op'>)</span>,</span>
+<span>            legislator_poc_prop <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>legislator_race</span> <span class='op'>!=</span> <span class='st'>"White"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>In this chunk of code, I edit my <code>state_data</code> tibble by adding a new variable called <code>poc_prop</code>. This variable is my main measure of population diversity, which is the total proportion of people of color/non-white people, measured across the 49 states. I also used this chunk to categorize each of the 49 states into one of the four U.S. Census regions: Northeast, South, West, and Midwest. This will help for my linear model visualization later on.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>state_data</span> <span class='op'>&lt;-</span> <span class='va'>state_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>mutate</span><span class='op'>(</span>poc_prop <span class='op'>=</span> <span class='va'>black_prop</span> <span class='op'>+</span> <span class='va'>asian_prop</span> <span class='op'>+</span> <span class='va'>hispanic_prop</span> <span class='op'>+</span> <span class='va'>hawaiian_prop</span> <span class='op'>+</span> <span class='va'>native_prop</span>,</span>
+<span>         region <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span></span>
+<span>           <span class='va'>state</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Connecticut"</span>, <span class='st'>"Maine"</span>, <span class='st'>"Massachusetts"</span>, <span class='st'>"New Hampshire"</span>, <span class='st'>"Rhode Island"</span>, <span class='st'>"Vermont"</span>, <span class='st'>"New Jersey"</span>, <span class='st'>"New York"</span>, <span class='st'>"Pennsylvania"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Northeast"</span>,</span>
+<span>           <span class='va'>state</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Delaware"</span>, <span class='st'>"District of Columbia"</span>, <span class='st'>"Florida"</span>, <span class='st'>"Georgia"</span>, <span class='st'>"Maryland"</span>, <span class='st'>"North Carolina"</span>, <span class='st'>"South Carolina"</span>, <span class='st'>"Virginia"</span>, <span class='st'>"West Virginia"</span>, <span class='st'>"Alabama"</span>, <span class='st'>"Kentucky"</span>, <span class='st'>"Mississippi"</span>, <span class='st'>"Tennessee"</span>, <span class='st'>"Arkansas"</span>, <span class='st'>"Louisiana"</span>, <span class='st'>"Oklahoma"</span>, <span class='st'>"Texas"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"South"</span>,</span>
+<span>           <span class='va'>state</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Arizona"</span>, <span class='st'>"Colorado"</span>, <span class='st'>"Idaho"</span>, <span class='st'>"New Mexico"</span>, <span class='st'>"Montana"</span>, <span class='st'>"Utah"</span>, <span class='st'>"Nevada"</span>, <span class='st'>"Wyoming"</span>, <span class='st'>"Alaska"</span>, <span class='st'>"California"</span>, <span class='st'>"Hawaii"</span>, <span class='st'>"Oregon"</span>, <span class='st'>"Washington"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"West"</span>,</span>
+<span>           <span class='va'>state</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Indiana"</span>, <span class='st'>"Illinois"</span>, <span class='st'>"Michigan"</span>, <span class='st'>"Ohio"</span>, <span class='st'>"Wisconsin"</span>, <span class='st'>"Iowa"</span>, <span class='st'>"Kansas"</span>, <span class='st'>"Minnesota"</span>, <span class='st'>"Missouri"</span>, <span class='st'>"Nebraska"</span>, <span class='st'>"North Dakota"</span>, <span class='st'>"South Dakota"</span><span class='op'>)</span> <span class='op'>~</span> <span class='st'>"Midwest"</span>,</span>
+<span>         <span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>Now, it’s time to start visualizing my outcome variable. The following is a plot summarizing my dependent variable of interest, the proportion of state legislators of color, across 49 states:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>dependent_plot</span> <span class='op'>&lt;-</span> <span class='va'>state_data</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>state</span>, y <span class='op'>=</span> <span class='va'>legislator_poc_prop</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_col</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>state</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"State Legislature Diversity vs. State"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"State"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Proportion of State Legislators of Color"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>guides</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>limits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>theme</span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>dependent_plot</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<h2 id="tibble-with-new-variables">Tibble with new variables</h2>
+<h2 id="results">Results</h2>
+<p>Time for some analysis! In this section, I will first present a linear model which serves to predict the proportion of legislators of color in a state, based on the proportion of voters of color in the same state. Plugging our data into the linear model returns an estimated coefficient of 0.92 percentage points, which shows a <em>strong positive relationship</em> between the proportion of voters of color and the proportion of legislators of color for a given state. Specifically, this means that for every 1 point increase in the proportion of voters of color in a state, there is an predicted associated increase of 0.92 points in the proportion of legislators of color in that same state. In the summary table, we can see that the associated p-value is 0 for this coefficient, meaning that it is extremely statistically significant and implying that we can <em>reject the null hypothesis</em> of voting population diversity having no effect on state legislator diversity. However, we cannot simply conclude that there is a causal relationship between voting population diversity and state legislator diversity, as there may be other confounding factors (other than voting population diversity) which contribute to this apparent relationship and affect legislator diversity in unseen wayplo</p>
+<p>Second, I will present a plot which serves to display this linear model in relation to the 49 data points (individual states). This plot illustrates just how closely the line of best fit produced by the linear model matches onto the state data points, demonstrating the full extent of the strong positive relationship between the independent (voting population diversity) and dependent (state legislator diversity) variables. Looking closely at the plot allows us to also understand why the coefficient in the summary table of the linear model is irrelevant here. The coefficient is -0.07, which would be the estimated proportion of legislators of color given there being no voting population of color. However, this clearly doesn’t make sense in the context of the variables, as a negative proportion is incoherent in this case. For further illustration, I added region colors to the plot, demonstrating that states in the West and South U.S. Census regions have especially high proportions of state legislators of color, perhaps due to the higher proportions of people of color in their respective voting populations as compared to states in the Northeast and especially in the Midwest.</p>
+<p>Below is the linear model and its coefficients.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>legislation_data_2</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>state</span>, <span class='va'>district</span>, <span class='va'>white_prop</span>, <span class='va'>black_prop</span>, <span class='va'>asian_prop</span>, <span class='va'>hispanic_prop</span>, <span class='va'>hawaiian_prop</span>, <span class='va'>native_prop</span>, <span class='va'>independent_prop</span>, <span class='va'>democrat_prop</span>, <span class='va'>republican_prop</span>, <span class='va'>legislator_race</span>, <span class='va'>legislator_gender</span>, <span class='va'>legislator_party</span>, <span class='va'>district_pop</span>, <span class='va'>registered_prop</span>, <span class='va'>legislative_branch</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>legislation_data_2</span>  </span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/knitr/'>knitr</a></span><span class='op'>)</span></span>
+<span><span class='va'>legislator_poc_prop_fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>legislator_poc_prop</span> <span class='op'>~</span> <span class='va'>poc_prop</span>,</span>
+<span>               data <span class='op'>=</span> <span class='va'>state_data</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>legislator_poc_prop_fit_1</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span>, <span class='st'>"html"</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 35,001 × 18
-    year state district white_prop black_prop asian_prop hispanic_prop
-   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;
- 1  2018 Alab…        1      0.794    0.140      0.00602        0.0369
- 2  2018 Alab…       10      0.663    0.185      0.0358         0.0608
- 3  2018 Alab…      100      0.724    0.193      0.0328         0.0293
- 4  2018 Alab…      101      0.692    0.211      0.0278         0.0472
- 5  2018 Alab…      102      0.794    0.127      0.00621        0.0184
- 6  2018 Alab…      103      0.299    0.627      0.0192         0.0337
- 7  2018 Alab…      104      0.687    0.180      0.0280         0.0667
- 8  2018 Alab…      105      0.794    0.112      0.0460         0.0277
- 9  2018 Alab…       11      0.923    0.00578    0.00257        0.0581
-10  2018 Alab…       12      0.913    0.0153     0.00509        0.0465
-# ℹ 34,991 more rows
-# ℹ 11 more variables: hawaiian_prop &lt;dbl&gt;, native_prop &lt;dbl&gt;,
-#   independent_prop &lt;dbl&gt;, democrat_prop &lt;dbl&gt;,
-#   republican_prop &lt;dbl&gt;, legislator_race &lt;chr&gt;,
-#   legislator_gender &lt;dbl&gt;, legislator_party &lt;chr&gt;,
-#   district_pop &lt;dbl&gt;, registered_prop &lt;dbl&gt;,
-#   legislative_branch &lt;chr&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+t value
+</th>
+<th style="text-align:right;">
+Pr(&gt;|t|)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+-3.63
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+poc_prop
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+15.72
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<h2 id="state-by-state">State by state</h2>
+<p>Now we can plot this linear model on top of the data points of the 49 states:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>state_data</span> <span class='op'>&lt;-</span> <span class='va'>legislation_data_2</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>state</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>white_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>white_prop</span><span class='op'>)</span>,</span>
-<span>            black_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>black_prop</span><span class='op'>)</span>,</span>
-<span>            asian_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>asian_prop</span><span class='op'>)</span>,</span>
-<span>            hispanic_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>hispanic_prop</span><span class='op'>)</span>,</span>
-<span>            hawaiian_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>hawaiian_prop</span><span class='op'>)</span>,</span>
-<span>            native_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>native_prop</span><span class='op'>)</span>,</span>
-<span>            independent_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>independent_prop</span><span class='op'>)</span>,</span>
-<span>            democrat_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>democrat_prop</span><span class='op'>)</span>,</span>
-<span>            republican_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>republican_prop</span><span class='op'>)</span>,</span>
-<span>            registered_prop_mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>registered_prop</span><span class='op'>)</span><span class='op'>)</span></span>
-<span>  </span>
-<span><span class='va'>state_data</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>main_plot</span> <span class='op'>&lt;-</span><span class='fu'>ggplot</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>state_data</span>,</span>
+<span>       mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>poc_prop</span>,</span>
+<span>                     y <span class='op'>=</span> <span class='va'>legislator_poc_prop</span>, color <span class='op'>=</span> <span class='va'>region</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, formula <span class='op'>=</span> <span class='va'>y</span> <span class='op'>~</span> <span class='va'>x</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"orange"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>scale_x_log10</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Proportion of Voting Population of Color"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Proportion of State Legislators of Color"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"State Legislator Diversity vs. State Population Diversity"</span>,</span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"In 49 U.S. States"</span>,</span>
+<span>       source <span class='op'>=</span> <span class='st'>"State Legislature Data, 2010-2022"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>scale_color_discrete</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"U.S. Census Region"</span><span class='op'>)</span></span>
+<span><span class='va'>main_plot</span></span></code></pre>
 </div>
-<pre><code># A tibble: 49 × 11
-   state       white_prop_mean black_prop_mean asian_prop_mean
-   &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
- 1 Alabama               0.647          0.272           0.0133
- 2 Alaska                0.597          0.0315          0.0634
- 3 Arizona               0.540          0.0420          0.0319
- 4 Arkansas              0.715          0.161           0.0140
- 5 California            0.368          0.0543          0.144 
- 6 Colorado              0.679          0.0384          0.0308
- 7 Connecticut           0.666          0.0984          0.0445
- 8 Delaware              0.614          0.220           0.0397
- 9 Florida               0.536          0.154           0.0269
-10 Georgia               0.524          0.314           0.0388
-# ℹ 39 more rows
-# ℹ 7 more variables: hispanic_prop_mean &lt;dbl&gt;,
-#   hawaiian_prop_mean &lt;dbl&gt;, native_prop_mean &lt;dbl&gt;,
-#   independent_prop_mean &lt;dbl&gt;, democrat_prop_mean &lt;dbl&gt;,
-#   republican_prop_mean &lt;dbl&gt;, registered_prop_mean &lt;dbl&gt;</code></pre>
+<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
 </div>
-<h2 id="state-plot">State plot!</h2>
-<h1 id="the-idea-here-is-to-start-to-understand-how-racial-diversity-varies-across-state-lines.-here-were-just-measuring-what-proportion-of-the-state-is-white-as-opposed-to-non-white.-my-next-steps-are">The idea here is to start to understand how racial diversity varies across state lines. Here, we’re just measuring what proportion of the state is white as opposed to non-white. My next steps are:</h1>
-<h1 id="create-another-way-to-measure-racial-diversity.-this-might-mean-creating-some-new-variable-that-takes-into-account-the-entire-population-makeup.">1) Create another way to measure racial diversity. This might mean creating some new variable that takes into account the entire population makeup.</h1>
-<h1 id="applying-the-above-diversity-metric-to-the-state-legislation-itself-to-then-analyze-the-varying-diversity-across-state-legislatures.">3) Applying the above diversity metric to the state legislation itself to then analyze the varying diversity across state legislatures.</h1>
-<h1 id="analyze-the-relationship-between-state-population-diversity-and-state-legislature-diversity-perhaps-by-creating-some-kind-of-model-that-predicts-the-state-legislatures-diversity-based-on-the-state-populations-diversity.">4) Analyze the relationship between state population diversity and state legislature diversity, perhaps by creating some kind of model that predicts the state legislature’s diversity based on the state population’s diversity.</h1>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>state_plot</span> <span class='op'>&lt;-</span> <span class='va'>state_data</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>state</span>, y <span class='op'>=</span> <span class='va'>white_prop_mean</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>state</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Population Whiteness vs. State"</span>,</span>
-<span>       x <span class='op'>=</span> <span class='st'>"State"</span>,</span>
-<span>       y <span class='op'>=</span> <span class='st'>"Proportion of White Population"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>limits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>state_plot</span></span></code></pre>
-</div>
-<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
-</div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+<p>At the end of this project, I conclude that there is significant support for my hypothesis that racial diversity in state voting populations will be positively correlated with racial diversity in their respective state legislatures. This support comes mainly from the plot and regression, which show a strong positive correlation and relationship between the proportion of voting population of color in 49 states and these states’ respective proportion of state legislators of color. However, as mentioned in the results section, we cannot be sure this relationship is entirely causal, as there might be unseen confounding factors or variables which are affecting the outcome variable in ways we cannot predict or account for using the simple linear model. Thus, confounding factors pose the most significant threat to my analysis and possible inference. If I had more time/money, I would continue this analysis, accounting for more variables that could potentially impact the diversity of state legislators. I would want to see how gender, specific race breakdowns, socioeconomic breakdowns, rural/suburban/urban breakdowns, religious breakdowns and other kinds of diversity would affect state legislator diversity. Further, I would like to measure state legislature diversity in a more nuance fashion, instead of simply measuring the proportion of state legislators of color. I would also want to do this on a district-by-district basis instead of on a state-by-state basis, as this would give me significantly more data points and would likely lead to my conclusions being more exact.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
