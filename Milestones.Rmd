@@ -1,0 +1,117 @@
+---
+title: "Milestones"
+author: "Nuriel Vera-DeGraff"
+date: "2023-12-14"
+output: html_document
+---
+```{r}
+library(tidyverse)
+```
+
+
+## Milestone 1: Repository 
+# I am interested in exploring data related to elections and polling, particularly data regarding polling/election prediction accuracy and data that could allow me to compare different weighting strategies in the polling process.
+
+## Milestone 2: Data and Proposal
+# How do the demographics of a state's voting population affect the demographics of its legislature? In my study, I will attempt to quantify the relationship/correlation between state populations' racial and gender diversity rates and their respective legislatures' racial and gender diversity rates. I hypothesize that racial and gender diversity in state populations will be positively correlated with the same kind of diversity in their state legislatures. This hypothesis follows from the theory that people are more likely to vote for candidates who are more similar to them, and so states with voting populations that have higher concentrations of different racial/ethnic groups will see a related increase in the concentrations of legislators from those racial/ethnic groups. My explanatory variables of interest are the total Asian population in the given state legislature district, as well as the total Hispanic/Latino population, the total Black population, the total white population, the total Native Hawaiian population, and the total Native American population. Each of these variables are measured by a raw count, which reflects the number of people in each of these groups. My outcome variables are the assigned race/ethnicity and gender of the state legislator of the given district, which are measured qualitatively (White, Black, etc. for race/ethnicity and male/female/etc. for gender). If I observe a positive correlation either between the general diversity of states' populations and the diversity of their state legislators OR between the concentration of certain racial groups in states' populations and and concentrations of those same racial groups in respective states' legislative bodies, my hypothesis would be supported. However, a lack of correlation (and perhaps even a negative correlation) between either of these two variables would work against my hypothesis. My data will likely be from https://www.legislatordiversity.com/.
+
+
+## Milestone 3: First Visualization
+
+```{r}
+legislation_data <- read_csv("legislatordiversity.com_data (1).csv")
+legislation_data
+```
+
+## New variables!
+
+```{r}
+legislation_data <- legislation_data |>
+  drop_na() |>
+  mutate(white_prop = `Total White Population In District`/`Total Population In District`,
+         black_prop = `Total Black Population In District`/`Total Population In District`,
+         asian_prop = `Total Asian Population In District`/`Total Population In District`,
+         hispanic_prop = `Total Hispanic / Latino Population In District`/`Total Population In District`,
+         hawaiian_prop = `Total Native Hawaiian Population In District`/`Total Population In District`,
+         native_prop = `Total American Indian Population In District`/`Total Population In District`,
+         independent_prop = `Total Registered Independents In District`/`Total Population In District`,
+         democrat_prop = `Total Registered Democrats In District`/`Total Population In District`,
+         republican_prop = `Total Registered Republicans In District`/`Total Population In District`,
+         legislator_race = `Assigned Race / Ethnicity Of Legislator`,
+         legislator_gender = if_else(`Assigned Gender Of Legislator` == "Female", 1, 0),
+         legislator_party = `Political Party Affiliation Of Legislator`,
+         district_pop = `Total Population In District`,
+         registered_prop = `Total Population Registered To Vote In District`/`Total Population In District`,
+         legislative_branch = if_else(`Legislative Branch` == "House Of Representatives", "House", "Senate"),
+         year = `Election Year`,
+         state = `State`,
+         district = as.numeric(`District`))
+legislation_data
+```
+
+## Alaska diversity plot
+
+```{r}
+alaska_diversity_plot <- legislation_data |>
+  filter(State == "Alaska") |>
+  filter(`Legislative Branch` == "Senate") |>
+  ggplot(mapping = aes(x = District, y = white_prop)) +
+  geom_col(mapping = aes(fill = District)) +
+  labs(title = "Population Whiteness vs. State Senate District in Alaska",
+       x = "State Senate District",
+       y = "Proportion of White People") +
+  guides(fill = FALSE) + 
+  scale_y_continuous(limits = c(0,1))
+  
+alaska_diversity_plot 
+```
+
+## Tibble with new variables
+
+```{r}
+legislation_data_2 <- legislation_data |>
+  select(year, state, district, white_prop, black_prop, asian_prop, hispanic_prop, hawaiian_prop, native_prop, independent_prop, democrat_prop, republican_prop, legislator_race, legislator_gender, legislator_party, district_pop, registered_prop, legislative_branch) |>
+
+legislation_data_2  
+```
+
+## State by state
+
+```{r}
+state_data <- legislation_data_2 |>
+  group_by(state) |>
+  summarize(white_prop = mean(white_prop),
+            black_prop = mean(black_prop),
+            asian_prop = mean(asian_prop),
+            hispanic_prop = mean(hispanic_prop),
+            hawaiian_prop = mean(hawaiian_prop),
+            native_prop = mean(native_prop),
+            independent_prop = mean(independent_prop),
+            democrat_prop = mean(democrat_prop),
+            republican_prop = mean(republican_prop),
+            registered_prop = mean(registered_prop),
+            legislator_poc_prop = mean(legislator_race != "White"))
+  
+state_data
+```
+
+## State plot!
+# The idea here is to start to understand how racial diversity varies across state lines. Here, we're just measuring what proportion of the state is white as opposed to non-white. My next steps are:
+# 1) Create another way to measure racial diversity. This might mean creating some new variable that takes into account the entire population makeup.
+# 3) Applying the above diversity metric to the state legislation itself to then analyze the varying diversity across state legislatures.
+# 4) Analyze the relationship between state population diversity and state legislature diversity, perhaps by creating some kind of model that predicts the state legislature's diversity based on the state population's diversity.
+
+```{r}
+
+state_plot <- state_data |>
+  ggplot(mapping = aes(x = state, y = white_prop)) +
+  geom_col(mapping = aes(fill = state)) +
+  labs(title = "Population Whiteness vs. State",
+       x = "State",
+       y = "Proportion of White Population") +
+  guides(fill = FALSE) + 
+  scale_y_continuous(limits = c(0,1)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+state_plot
+```
