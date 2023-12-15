@@ -20,7 +20,7 @@ To start offering insight into my data, I first needed to alter the data signifi
 
 First, I loaded in the data, created new variables, and renamed some of the original variables.
 
-```{r, echo = FALSE}
+```{r}
 library(tidyverse)
 legislation_data <- read_csv("legislatordiversity.com_data (1).csv")
 

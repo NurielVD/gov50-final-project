@@ -1522,27 +1522,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="data">Data</h2>
 <p>In this project, I used a data frame from <a href="https://www.legislatordiversity.com/" class="uri">https://www.legislatordiversity.com/</a>, a website created by Andy Neville (<a href="https://www.linkedin.com/in/andrew-neville-88a33233/" class="uri">https://www.linkedin.com/in/andrew-neville-88a33233/</a>) and Ian Flick (<a href="https://www.linkedin.com/in/ian-flick-00613371/" class="uri">https://www.linkedin.com/in/ian-flick-00613371/</a>). The website is called <em>Legislator Diversity</em> and details diversity of various kinds in state legislatures across the country. For my purpose, the key dependent variable, originally a qualitative variable for each legislator (as presented in the source) and then eventually translated into a quantitative variable (as a proportion of legislators of color for each state) is the race of individual state legislators across the country, were collected by the creators by scraping through membership lists from various national ethnic state legislator caucuses (like the National Black Caucus of State Legislators), news articles, Wikipedia findings, and “manual classification based on the authors’ visual review of a legislator’s picture”. On the other hand, the key independent variable (as presented in the source) is the race breakdown of state voting populations. This variable, a quantitative variable, was compiled through “‘Demographic and Housing Estimates’ (Table DP05) from the U.S. Census Bureau’s 2018 American Community Survey” and official state voter rolls (on a state-by-state basis). Based on the nature of my data source and the variables I will be comparing, this project has a cross-sectional design: I am comparing the outcome variable (proportion of non-white state legislators) across states with varying proportions of treated vs. control units (akin to the varying proportion of non-white voters in different states) during a given time frame (2010-2022).</p>
 <p>To start offering insight into my data, I first needed to alter the data significantly. First, this meant creating new variables that represented the proportion of different racies/ethnicities represented in a given state legislature district (like <code>black_prop</code>). I also changed the names of some of the other variables of interest to make them more useful. Then, I condensed my data set, only keeping the variables I really needed to investigate my research question. These centered around the racial breakdown of the voting population and information about the individual legislators. I also created a new variable, <code>legislator_poc_prop</code>, which measured the proportion of legislators of color in a given state. Critically, at this point I group my data by state, so I can see aggregated information 49 states. Next, I started visualizing my outcome variable by creating a plot summarizing my dependent variable of interest (the proportion of state legislators of color) across 49 states.</p>
+<p>First, I loaded in the data, created new variables, and renamed some of the original variables.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code># A tibble: 35,001 × 39
-   `Election Year` State   `Legislative Branch`     District
-             &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                    &lt;chr&gt;   
- 1            2018 Alabama House Of Representatives 1       
- 2            2018 Alabama House Of Representatives 10      
- 3            2018 Alabama House Of Representatives 100     
- 4            2018 Alabama House Of Representatives 101     
- 5            2018 Alabama House Of Representatives 102     
- 6            2018 Alabama House Of Representatives 103     
- 7            2018 Alabama House Of Representatives 104     
- 8            2018 Alabama House Of Representatives 105     
- 9            2018 Alabama House Of Representatives 11      
-10            2018 Alabama House Of Representatives 12      
-# ℹ 34,991 more rows
-# ℹ 35 more variables: `Name Of Elected Legislator` &lt;chr&gt;,
-#   `Political Party Affiliation Of Legislator` &lt;chr&gt;,
-#   `Assigned Race / Ethnicity Of Legislator` &lt;chr&gt;,
-#   `Assigned Gender Of Legislator` &lt;chr&gt;,
-#   `Total Population In District` &lt;dbl&gt;,
-#   `Total Voting Age Population In District` &lt;dbl&gt;, …</code></pre>
+
 </div>
 <p>In the following chunk, I condense my data set to columns of interest and (critically) group the data by state. Here, I also create the new variable <code>legislator_poc_prop</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1684,7 +1666,7 @@ poc_prop
 </div>
 <h2 id="conclusion">Conclusion</h2>
 <p>At the end of this project, I conclude that there is significant support for my hypothesis that racial diversity in state voting populations will be positively correlated with racial diversity in their respective state legislatures. This support comes mainly from the plot and regression, which show a strong positive correlation and relationship between the proportion of voting population of color in 49 states and these states’ respective proportion of state legislators of color. However, as mentioned in the results section, we cannot be sure this relationship is entirely causal, as there might be unseen confounding factors or variables which are affecting the outcome variable in ways we cannot predict or account for using the simple linear model. Thus, confounding factors pose the most significant threat to my analysis and possible inference. If I had more time/money, I would continue this analysis, accounting for more variables that could potentially impact the diversity of state legislators. I would want to see how gender, specific race breakdowns, socioeconomic breakdowns, rural/suburban/urban breakdowns, religious breakdowns and other kinds of diversity would affect state legislator diversity. Further, I would like to measure state legislature diversity in a more nuance fashion, instead of simply measuring the proportion of state legislators of color. I would also want to do this on a district-by-district basis instead of on a state-by-state basis, as this would give me significantly more data points and would likely lead to my conclusions being more exact.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
