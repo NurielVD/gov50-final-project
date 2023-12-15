@@ -18,6 +18,8 @@ In this project, I used a data frame from https://www.legislatordiversity.com/, 
 To start offering insight into my data, I first needed to alter the data significantly. First, this meant creating new variables that represented the proportion of different racies/ethnicities represented in a given state legislature district (like `black_prop`). I also changed the names of some of the other variables of interest to make them more useful. Then, I condensed my data set, only keeping the variables I really needed to investigate my research question. These centered around the racial breakdown of the voting population and information about the individual legislators. I also created a new variable, `legislator_poc_prop`, which measured the proportion of legislators of color in a given state. Critically, at this point I group my data by state, so I can see aggregated information 49 states. Next, I started visualizing my outcome variable by creating a plot summarizing my dependent variable of interest (the proportion of state legislators of color) across 49 states.
 
 
+First, I loaded in the data, created new variables, and renamed some of the original variables.
+
 ```{r, echo = FALSE}
 library(tidyverse)
 legislation_data <- read_csv("legislatordiversity.com_data (1).csv")
@@ -42,7 +44,6 @@ legislation_data <- legislation_data |>
          year = `Election Year`,
          state = `State`,
          district = as.numeric(`District`))
-legislation_data
 ```
 
 In the following chunk, I condense my data set to columns of interest and (critically) group the data by state. Here, I also create the new variable `legislator_poc_prop`.
